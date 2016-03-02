@@ -19,11 +19,27 @@
 
   function Celsius(valor)
   {
+    Temperatura.call(this,valor,"c");
+    /*celsius hereda de temperatura y llama al constructor ponindo por defecto la c en tipo*/
+    this.convFarenheit = function() {
+      /*https://www.youtube.com/watch?v=lzFOBC1SotI*/
+      return ((valor * 9/5) + 32);
+    };
   }
+
+  Celsius.prototype = new Temperatura();
+  Celsius.prototype.constructor = Celsius;
 
   function Farenheit(valor)
   {
+    Temperatura.call(this,valor,"f");
+    this.convCelsius = function() {
+      return ((valor - 32) * 5/9);
+    };
   }
+
+  Farenheit.prototype = new Temperatura();
+  Farenheit.prototype.constructor = Farenheit;
 
   exports.Temperatura = Temperatura;
   exports.Celsius = Celsius;
