@@ -17,13 +17,17 @@
   Temperatura.prototype.constructor = Temperatura;
 /*https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Function/call*/
 
+/*Las conversiones de temperatura se han sacado de: https://es.wikipedia.org/wiki/Temperatura*/
   function Celsius(valor)
   {
     Temperatura.call(this,valor,"c");
     /*celsius hereda de temperatura y llama al constructor ponindo por defecto la c en tipo*/
     this.convFarenheit = function() {
-      /*https://www.youtube.com/watch?v=lzFOBC1SotI*/
       return ((valor * 9/5) + 32);
+    };
+
+    this.convKelvin = function() {
+      return (valor + 273.15);
     };
   }
 
@@ -36,6 +40,9 @@
     this.convCelsius = function() {
       return ((valor - 32) * 5/9);
     };
+    this.convKelvin = function() {
+      return((valor + 459.67) * 5/9);
+    };
   }
 
   Farenheit.prototype = new Temperatura();
@@ -43,6 +50,12 @@
 
   function Kelvin(valor) {
     Temperatura.call(this, valor, "k");
+    this.convCelsius = function() {
+      return(valor - 273.15);
+    };
+    this.convFarenheit = function() {
+      return(valor * 9/5 - 459.67);
+    };
   }
 
   Kelvin.prototype = new Temperatura();
